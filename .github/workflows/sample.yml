@@ -14,12 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check if service name is provided
-        if: ${{ github.event.inputs.service_name == '' }}
+        if: ${{ github.event.inputs.service_name != 'JobPortal.Web.Api' }}
         run: |
-          echo "No service name provided. Please provide a service name."
-          exit 1 # Exit with an error code
+          echo "Service name is not provided as 'JobPortal.Web.Api'. Please provide the correct service name."
       
       - name: Print service name
-        if: ${{ github.event.inputs.service_name != '' }}
+        if: ${{ github.event.inputs.service_name == 'JobPortal.Web.Api' }}
         run: |
-          echo "Service name is provided: ${{ github.event.inputs.service_name }}"
+          echo "Service name is provided as 'JobPortal.Web.Api'"

@@ -1,0 +1,22 @@
+name: Manual Deployment Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      service: 
+        description: "Can be a git short hash or tag"
+        type: string
+        required: true
+
+jobs:
+  CD:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if service input is provided
+        run: |
+          if [ -z "${{ github.event.inputs.service }}" ]; then
+            echo "Service input is not provided."
+            exit 1 # Exit with an error code
+          else
+            echo "Service input is provided: ${{ github.event.inputs.service }}"
+          fi

@@ -3,8 +3,8 @@ name: Manual Deployment Workflow
 on:
   workflow_dispatch:
     inputs:
-      service: 
-        description: "Can be a git short hash or tag"
+      service_name:
+        description: "Specify the service name"
         type: string
         required: true
 
@@ -12,11 +12,13 @@ jobs:
   CD:
     runs-on: ubuntu-latest
     steps:
-      - name: Check if service input is provided
+      - name: Check if service name is provided
+        if: ${{ github.event.inputs.service_name == '' }}
         run: |
-          if [ -z "${{ github.event.inputs.service }}" ]; then
-            echo "Service input is not provided."
-            exit 1 # Exit with an error code
-          else
-            echo "Service input is provided: ${{ github.event.inputs.service }}"
-          fi
+          echo "No service name provided. Please provide a service name."
+          exit 1 # Exit with an error code
+      
+      - name: Print service name
+        if: ${{ github.event.inputs.service_name != '' }}
+        run: |
+          echo "Service name is provided: ${{ github.event.inputs.service_name }}"

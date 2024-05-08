@@ -7,7 +7,7 @@ on:
         description: "Specify the service name"
         type: string
         required: true
-        default: "Jotal.Web.Api"
+        default: "JobPortal.Web.Api"
 
 jobs:
   CD:

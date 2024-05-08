@@ -14,11 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: if service name is not JobPortal.Web.Api
-        if: ${{ inputs.service_name != 'JobPortal.Web.Api' }}
+        if: inputs.service_name != 'JobPortal.Web.Api'
         run: |
           echo "Service name is not provided as 'JobPortal.Web.Api'. Please provide the correct service name."
       
       - name: if service name is JobPortal.Web.Api
-        if: ${{ inputs.service_name == 'JobPortal.Web.Api' }}
+        if: inputs.service_name == 'JobPortal.Web.Api'
         run: |
           echo "Service name is provided as 'JobPortal.Web.Api'"
